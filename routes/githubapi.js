@@ -6,6 +6,28 @@ const githubDatabase = require('../model/githubUserData')
 const friendDatabase = require("../model/Friend")
 router.use(bodyParser.json())
 
+router.get('/user/alldata/', async (req, res) => {
+    try {
+
+        const data = await githubDatabase.find(req.query).populate('Friends').sort([[req.query.sortby]])
+
+        res.status(200).json(data)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+
+})
+router.get('/user/friend/:username', async (req, res) => {
+    try {
+
+        const data = await friendDatabase.find(req.params)
+
+        res.status(200).json(data)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+
+})
 
 router.post('/user/add/:username', async (req, res) => {
     try {
@@ -82,6 +104,25 @@ router.post('/user/add/:username', async (req, res) => {
 
 })
 
+router.patch('/user/update/:username', async (req, res) => {
+    try {
+        const data = await githubDatabase.updateOne(req.params, req.body)
 
+        res.status(200).json({ message: "updated successfully" })
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+
+})
+
+router.delete('/user/delete/:username', async (req, res) => {
+    try {
+        const data = await githubDatabase.deleteOne(req.params)
+        res.status(200).json({ message: "deleted successfully" })
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+
+})
 
 module.exports = router;
