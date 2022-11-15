@@ -118,6 +118,7 @@ router.patch('/user/update/:username', async (req, res) => {
 router.delete('/user/delete/:username', async (req, res) => {
     try {
         const data = await githubDatabase.deleteOne(req.params)
+        const frnddata = await friendDatabase.deleteOne(req.params)
         res.status(200).json({ message: "deleted successfully" })
     } catch (err) {
         res.status(400).json({ message: err.message })
