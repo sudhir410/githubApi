@@ -1,8 +1,7 @@
-const express = require('express'); 
+const express = require('express');
 const mongoose = require('mongoose')
 const app = express()
-
-
+const githubApiRouter = require("./routes/githubapi")
 mongoose.connect('mongodb+srv://cmanager124:cmanager124@cluster0.9uvvjcb.mongodb.net/contactManager?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {
         console.log(err)
@@ -11,7 +10,7 @@ mongoose.connect('mongodb+srv://cmanager124:cmanager124@cluster0.9uvvjcb.mongodb
     }
 })
 
-
+app.use("/api/github", githubApiRouter)
 
 
 app.get('*', (req, res) => {
