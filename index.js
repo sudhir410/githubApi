@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const app = express()
 const githubApiRouter = require("./routes/githubapi")
-mongoose.connect('mongodb+srv://cmanager124:cmanager124@cluster0.9uvvjcb.mongodb.net/contactManager?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect('mongodb+srv://sudhirchoudhary410:sudhir410@startup.a101qex.mongodb.net/userform?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {
         console.log(err)
     } else {
